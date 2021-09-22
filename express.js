@@ -6,7 +6,8 @@ const morgan = require('morgan')
 const config = require('./config')
 const template = require('./template')
 const errorHandler = require('./middlewares/errorHandler')
-const apiRouter = require('./routers/api.router')
+const apiRouter = require('./routers/api/index.js')
+const authRouter = require('./routers/auth.router')
 
 const app = express()
 
@@ -19,6 +20,8 @@ app.use(helmet())
 app.get('/', (req, res) => {
   res.send(template())
 })
+
+app.use('/auth', authRouter)
 
 app.use('/api', apiRouter)
 
